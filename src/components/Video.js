@@ -113,7 +113,7 @@ class Video extends React.PureComponent
         this.setState({ socket });
 
         const roomId = this.props.roomId;
-        let isHost = this.props.flags == "true";
+        let isHost = this.props.flags === "true";
 
         this.getUserMedia(this.state.facingMode).then(() =>
         {
