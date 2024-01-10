@@ -1,0 +1,62 @@
+import Peer from 'simple-peer'
+
+import { selectCodec, setMediaBitrate } from "./SdpUtils";
+
+const createSimplePeer = (stream, initiator, config) =>
+{
+    console.log("createPeer", config);
+
+    const {
+        PEER_ICE_TRANSPORT_POLICY,
+        PEER_VIDEO_CODEC,
+        PEER_AUDIO_CODEC,
+        PEER_VIDEO_BITRATE,
+        PEER_ICE_SERVERS,
+        PEER_DEBUG,
+    } = config || {};
+
+
+    console.log(config, PEER_ICE_TRANSPORT_POLICY);
+
+    console.log('creating peer');
+    const peer = new Peer(
+        {
+            initiator: initiator,
+            stream: stream,
+            trickle: true,
+            iceTransportPolicy: PEER_ICE_TRANSPORT_POLICY || "all",
+            sdpTransform: sdp =>
+            {
+                if (PEER_VIDEO_CODEC)
+                {
+                    sdp = selectCodec(sdp, "video", PEER_VIDEO_CODEC);
+                }
+
+                if (PEER_AUDIO_CODEC)
+                {
+                    sdp = selectCodec(sdp, "audio", PEER_AUDIO_CODEC);
+                }
+
+                if (PEER_VIDEO_BITRATE)
+                {
+                    sdp = setMediaBitrate(sdp, "video", PEER_VIDEO_BITRATE);
+                }
+
+                 console.log(sdp);
+
+                return sdp;
+            },
+            config: { iceServers: PEER_ICE_SERVERS || [] },
+        });
+
+    if (PEER_DEBUG)
+    {
+        peer._debug = PEER_DEBUG;
+    }
+
+    console.log(peer);
+    
+    return peer;
+}
+
+export { createSimplePeer };
