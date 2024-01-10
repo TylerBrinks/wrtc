@@ -30,7 +30,7 @@ function Home(props)
                             </Box>
 
                             <form noValidate autoComplete="off" onSubmit={startCall}>
-                                <TextField fullWidth={true} id="code" label="Room ID" variant="outlined" value={code} onChange={e => setCode(e.target.value)} />
+                                <TextField fullWidth={true} id="room" label="Room ID" variant="outlined" value={code} onChange={e => setCode(e.target.value)} />
                                 <TextField fullWidth={true} id="code" label="Host" variant="outlined" value={host} onChange={e => setHost(e.target.value)} />
                             </form>
 
