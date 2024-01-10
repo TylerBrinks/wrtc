@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
-
 import Video from "./components/Video";
 import Home from "./components/Home";
 
