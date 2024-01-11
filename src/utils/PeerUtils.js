@@ -41,7 +41,7 @@ const createSimplePeer = (stream, initiator, config) =>
                     sdp = setMediaBitrate(sdp, "video", PEER_VIDEO_BITRATE);
                 }
 
-                 console.log(sdp);
+                //console.log(sdp);
 
                 return sdp;
             },
