@@ -53,7 +53,7 @@ const createSimplePeer = (stream, initiator, config) =>
         peer._debug = PEER_DEBUG;
     }
 
-    console.log(peer);
+    console.log("peer",peer);
     
     return peer;
 }
