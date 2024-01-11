@@ -47,6 +47,8 @@ class Video extends React.PureComponent
 
         peer.on("signal", data =>
         {
+            console.log("signal", data);
+
             const signal =
             {
                 from: this.state.socket.id,
@@ -72,6 +74,7 @@ class Video extends React.PureComponent
 
         peer.once("close", () =>
         {
+            console.log("close");
             this.destroyPeer(id);
 
             // this.setState({ connecting: true, remoteStream: {}, peer: {} });
@@ -79,6 +82,7 @@ class Video extends React.PureComponent
 
         peer.on('error', err =>
         {
+            console.log("error");
             this.destroyPeer(id);
 
             // this.setState({ initiator: true, connecting: false, waiting: true })
@@ -117,6 +121,7 @@ class Video extends React.PureComponent
 
         this.getUserMedia(this.state.facingMode).then(() =>
         {
+            console.log("emit enter", data);
             socket.emit("enter", { roomId: roomId });
         });
 
@@ -127,7 +132,7 @@ class Video extends React.PureComponent
 
         socket.on("sockets", ({ sockets, peerConfig }) =>
         {
-            console.log("sockets", socket.id, sockets, peerConfig);
+            console.log("sockets fn", socket.id, sockets, peerConfig);
 
             this.setState({ connected: true, peerConfig });
 
@@ -144,7 +149,7 @@ class Video extends React.PureComponent
 
         socket.on("message", message =>
         {
-            console.log("message", socket.id, message);
+            console.log("message fn", socket.id, message);
 
             if (message?.type === "disconnected")
             {
@@ -212,6 +217,8 @@ class Video extends React.PureComponent
     {
         if ((this.localVideo = ref))
         {
+            console.log("setLocalVideoStream fn", data);
+
             // ref.muted = true;
             // ref.setAttribute("muted", "");
 
@@ -240,6 +247,8 @@ class Video extends React.PureComponent
     {
         if (this.localVideo)
         {
+            console.log("did update");
+
             this.localVideo.muted = true;
             this.localVideo.setAttribute("muted", "");
         }
@@ -274,6 +283,7 @@ class Video extends React.PureComponent
         // this.state.peer.addStream(this.state.localStream);
 
         const tracks = this.state.localStream.getTracks();
+        console.log("tracks", tracks);
 
         for (const track of tracks)
         {

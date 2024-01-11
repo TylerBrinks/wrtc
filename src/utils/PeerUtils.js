@@ -4,7 +4,6 @@ import { selectCodec, setMediaBitrate } from "./SdpUtils";
 
 const createSimplePeer = (stream, initiator, config) =>
 {
-    console.log("createPeer", config);
 
     const {
         PEER_ICE_TRANSPORT_POLICY,
@@ -15,10 +14,10 @@ const createSimplePeer = (stream, initiator, config) =>
         PEER_DEBUG,
     } = config || {};
 
+    console.log("createPeer", config);
 
     console.log(config, PEER_ICE_TRANSPORT_POLICY);
 
-    console.log('creating peer');
     const peer = new Peer(
         {
             initiator: initiator,
