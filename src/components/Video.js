@@ -13,6 +13,10 @@ import { createSimplePeer } from '../utils/PeerUtils';
 
 import Notifications from './Notifications';
 
+const divStyle = {
+    width: '300px',
+    display: 'inline'
+  };
 
 class Video extends React.PureComponent
 {
@@ -334,10 +338,10 @@ class Video extends React.PureComponent
 
                 {/* the local stream ... */}
                 {this.state.localDisabled !== true &&
-                    < div id="localVideoWrapper" style="width: 300px; display: inline" >
+                    < div id="localVideoWrapper" style="" >
                         <video
                             id="localVideo"
-                            style="width: 300px; display: inline" 
+                            style={divStyle} 
                             ref={this.setLocalVideoStream}
                             autoPlay
                             playsInline
@@ -349,9 +353,9 @@ class Video extends React.PureComponent
                 {
                     Object.entries(this.state.remoteStreams).map(([id, stream]) => (
                         stream._enabled !== false &&
-                        <div key={"remote-stream-" + id} style="width: 300px; display: inline" >
+                        <div key={"remote-stream-" + id} style={divStyle}  >
                             <video
-                            style="width: 300px; display: inline" 
+                            style={divStyle} 
                                 id={"remote-video-" + id}
                                 ref={ref => this.setRemoteVideoStream(ref, stream)}
                                 autoPlay
