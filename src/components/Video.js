@@ -121,7 +121,7 @@ class Video extends React.PureComponent
 
         this.getUserMedia(this.state.facingMode).then(() =>
         {
-            console.log("emit enter", data);
+            console.log("emit enter");
             socket.emit("enter", { roomId: roomId });
         });
 
@@ -217,7 +217,7 @@ class Video extends React.PureComponent
     {
         if ((this.localVideo = ref))
         {
-            console.log("setLocalVideoStream fn", data);
+            console.log("setLocalVideoStream fn");
 
             // ref.muted = true;
             // ref.setAttribute("muted", "");
@@ -334,10 +334,10 @@ class Video extends React.PureComponent
 
                 {/* the local stream ... */}
                 {this.state.localDisabled !== true &&
-                    < div id="localVideoWrapper" >
+                    < div id="localVideoWrapper" style="width: 300px; display: inline" >
                         <video
                             id="localVideo"
-                           
+                            style="width: 300px; display: inline" 
                             ref={this.setLocalVideoStream}
                             autoPlay
                             playsInline
@@ -349,8 +349,9 @@ class Video extends React.PureComponent
                 {
                     Object.entries(this.state.remoteStreams).map(([id, stream]) => (
                         stream._enabled !== false &&
-                        <div key={"remote-stream-" + id} >
+                        <div key={"remote-stream-" + id} style="width: 300px; display: inline" >
                             <video
+                            style="width: 300px; display: inline" 
                                 id={"remote-video-" + id}
                                 ref={ref => this.setRemoteVideoStream(ref, stream)}
                                 autoPlay
